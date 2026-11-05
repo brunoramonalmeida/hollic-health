@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="385.899" height="750.68" viewBox="0 0 385.899 750.68">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.557" y1="0.292" x2="-0.104" y2="0.101" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ca5438"/>
+      <stop offset="0.42" stop-color="#db8130"/>
+      <stop offset="1" stop-color="#edaf28"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.227" y1="-0.115" x2="1.686" y2="0.283" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="0.154" y1="0.166" x2="1.399" y2="0.702" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="Grupo_1943" data-name="Grupo 1943" transform="translate(-77.81 -175.8)">
+    <path id="Caminho_4882" data-name="Caminho 4882" d="M100.346,0s-29.3,39.261,63.6,123.328C244.031,195.8,355.11,231.467,380.983,348.376,405.491,459.1,332.122,569.1,301.263,598.031c0,0,26.648-70.864-66.618-162.6C182.011,383.667,117.9,358.073,67.932,306.9-47.265,188.926-2.073,45.163,100.348,0Z" transform="translate(77.802 175.8)" fill="#0a183d" fill-rule="evenodd"/>
+    <path id="Caminho_4883" data-name="Caminho 4883" d="M226.125,1822.1S362.21,1671.89,264.05,1555.887c-56.7-71.324-164.6-108.654-210.445-180.7,0,0-31.269,89.481,2.929,175.96,34.159,86.406,91.345,92.487,141.536,150.213,24.126,27.748,41.238,66.187,28.053,120.74Z" transform="translate(46.225 -895.623)" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    <path id="Caminho_4884" data-name="Caminho 4884" d="M229.128,2132.5s136.084-150.211,37.925-266.215c-23.609-29.7-56.091-53.5-89.273-76.366-41.351-15.706-88.489-23.464-133.069-7.662l-.32.112c80.519,63.881,128.656,173.517,143.855,215.815,4.312,4.21,8.595,8.708,12.827,13.574,24.126,27.748,41.238,66.185,28.053,120.74Z" transform="translate(43.223 -1206.022)" fill-rule="evenodd" fill="url(#linear-gradient-2)"/>
+    <path id="Caminho_4885" data-name="Caminho 4885" d="M229.135,2159.815s1.04-1.151,2.845-3.288c8.882-29.207,10.123-81.711-29.9-169.7C154.624,1882.516,87.4,1831.329,47.42,1808.651c-.9.3-1.8.6-2.7.923l-.32.113c80.519,63.881,128.656,173.516,143.855,215.814,4.312,4.21,8.595,8.708,12.827,13.574C225.208,2066.823,242.32,2105.26,229.135,2159.815Z" transform="translate(43.215 -1233.337)" fill-rule="evenodd" fill="url(#linear-gradient-3)"/>
+  </g>
+</svg>
