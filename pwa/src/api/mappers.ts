@@ -5,7 +5,7 @@ export function mapCustomerToUser(customer: ApiCustomer | null | undefined, emai
   const contact = customer?.contacts?.[0]
   return {
     id: customer?.id ?? 0,
-    name: customer?.name ?? 'Cliente',
+    name: customer?.name ?? 'Customer',
     email: customer?.email || contact?.email || emailFallback || '',
     phone: contact?.cellphone || contact?.phone || customer?.cellphone || customer?.phone || '',
     cpf: customer?.cpf || customer?.document || '',
@@ -52,7 +52,7 @@ export function mapApiAddress(address?: ApiAddress | null): Address {
 
 export function toAddressPayload(address: Address) {
   if (!address.cityId || !address.stateId || !address.city || !address.state) {
-    throw new Error('Selecione cidade e estado para salvar o endereço.')
+    throw new Error('Select a city and a state before saving the address.')
   }
 
   return {
@@ -70,7 +70,7 @@ export function mapApiAppointment(item: ApiAppointment): Appointment {
   const status = normalizeStatus(item.meta?.status, item.status_label)
   return {
     id: item.id,
-    category: item.category || 'Atendimento',
+    category: item.category || 'Visit',
     holder: item.patient || item.holder || '',
     professional: item.professional || '',
     clinic: item.clinic || '',
@@ -86,7 +86,7 @@ export function mapApiAppointment(item: ApiAppointment): Appointment {
 export function mapApiNotification(item: ApiNotification): NotificationItem {
   return {
     id: item.id,
-    title: item.title || 'Notificação',
+    title: item.title || 'Notification',
     body: item.message || '',
     date: item.send_at || item.created_at || new Date().toISOString(),
     read: Boolean(item.is_read || item.read_at),
@@ -111,13 +111,13 @@ function normalizeStatus(status?: string, label?: string): AppointmentStatus {
 function statusLabelFrom(status: AppointmentStatus) {
   switch (status) {
     case 'canceled':
-      return 'Cancelado'
+      return 'Cancelled'
     case 'completed':
-      return 'Concluído'
+      return 'Completed'
     case 'under_analysis':
-      return 'Em análise'
+      return 'Under review'
     default:
-      return 'Agendado'
+      return 'Scheduled'
   }
 }
 
@@ -126,5 +126,5 @@ function formatDateBr(value?: string) {
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(value)) return value
   const d = new Date(value)
   if (Number.isNaN(d.getTime())) return value
-  return d.toLocaleDateString('pt-BR')
+  return d.toLocaleDateString('en-US')
 }

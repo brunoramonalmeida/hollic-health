@@ -1,6 +1,6 @@
 import type { AuthSession } from './types'
 
-const SESSION_KEY = 'sante_pwa_session'
+const SESSION_KEY = 'hollic_pwa_session'
 
 export function loadSession(): AuthSession | null {
   try {
@@ -14,13 +14,13 @@ export function loadSession(): AuthSession | null {
 
 export function saveSession(session: AuthSession) {
   localStorage.setItem(SESSION_KEY, JSON.stringify(session))
-  // limpa sessão mock antiga
-  localStorage.removeItem('sante_pwa_user')
+  // drop the old mock session
+  localStorage.removeItem('hollic_pwa_user')
 }
 
 export function clearSession() {
   localStorage.removeItem(SESSION_KEY)
-  localStorage.removeItem('sante_pwa_user')
+  localStorage.removeItem('hollic_pwa_user')
 }
 
 export function authHeaderFromSession(session: AuthSession | null): string | null {

@@ -5,24 +5,24 @@ import { APP_VERSION, WHATSAPP } from '../data/mock'
 
 const items = [
   {
-    label: 'Meus dados',
+    label: 'My details',
     icon: '/assets/icons/user_profile_icon.svg',
-    to: '/app/perfil/dados',
+    to: '/app/profile/details',
   },
   {
-    label: 'Endereço',
+    label: 'Address',
     icon: '/assets/icons/address_profile_icon.svg',
-    to: '/app/perfil/endereco',
+    to: '/app/profile/address',
   },
   {
-    label: 'Fale com o suporte',
+    label: 'Contact support',
     icon: '/assets/icons/whatsapp_profile_icon.svg',
     action: 'whatsapp' as const,
   },
   {
-    label: 'Alterar Senha',
+    label: 'Change password',
     icon: '/assets/icons/password_profile_icon.svg',
-    to: '/app/perfil/senha',
+    to: '/app/profile/password',
   },
 ]
 
@@ -59,9 +59,9 @@ export function ProfilePage() {
         ))}
       </div>
       <div style={{ padding: '16px 10px' }}>
-        <Button onClick={() => void handleLogout()}>Sair do aplicativo</Button>
+        <Button onClick={() => void handleLogout()}>Sign out</Button>
       </div>
-      <p className="profile__version">Versão {APP_VERSION}</p>
+      <p className="profile__version">Version {APP_VERSION}</p>
     </div>
   )
 }

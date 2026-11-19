@@ -19,14 +19,12 @@ export default defineConfig(({ mode }) => {
           'assets/icons/icon-512.png',
           'assets/icons/icon-maskable-512.png',
           'assets/icons/apple-touch-icon.png',
-          'assets/images/logo.svg',
-          'assets/images/logo_splash.svg',
         ],
         manifest: {
-          name: 'Santé Saúde',
-          short_name: 'Santé',
+          name: 'Hollic Health',
+          short_name: 'Hollic',
           description:
-            'Assine nosso plano e cuide da sua saúde e da de seus familiares.',
+            'Book appointments and look after your health and your family’s.',
           theme_color: '#E08D2E',
           background_color: '#FFFFFF',
           display: 'standalone',
@@ -34,7 +32,7 @@ export default defineConfig(({ mode }) => {
           orientation: 'portrait',
           start_url: './',
           scope: './',
-          lang: 'pt-BR',
+          lang: 'en',
           icons: [
             {
               src: '/assets/icons/icon-192.png',

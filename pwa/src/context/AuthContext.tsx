@@ -99,7 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = await fetchAppointments()
       setAppointments((Array.isArray(data) ? data : []).map(mapApiAppointment))
     } catch {
-      // mantém lista atual em caso de falha pontual
+      // keep the current list if this refresh fails
     } finally {
       setLoadingAppointments(false)
     }
@@ -154,7 +154,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { ok: true }
     } catch (error) {
       const message =
-        error instanceof ApiError ? error.message : 'Não foi possível entrar. Tente novamente.'
+        error instanceof ApiError ? error.message : 'Could not sign in. Please try again.'
       return { ok: false, message }
     }
   }, [])
@@ -163,7 +163,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await logoutRequest()
     } catch {
-      // limpa local mesmo se a API falhar
+      // clear local state even if the API call fails
     } finally {
       clearAuth()
     }
@@ -204,7 +204,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       return { ok: true }
     } catch (error) {
-      const message = error instanceof ApiError ? error.message : 'Falha ao atualizar dados.'
+      const message = error instanceof ApiError ? error.message : 'Could not update your details.'
       return { ok: false, message }
     }
   }, [])
@@ -223,7 +223,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       await markNotificationReadRequest(id)
     } catch {
-      // UI já otimista
+      // UI was already updated optimistically
     }
   }, [])
 
@@ -236,7 +236,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
       return { ok: true }
     } catch (error) {
-      const message = error instanceof ApiError ? error.message : 'Falha ao alterar senha.'
+      const message = error instanceof ApiError ? error.message : 'Could not change the password.'
       return { ok: false, message }
     }
   }, [])

@@ -15,9 +15,9 @@ from email.message import EmailMessage
 from pathlib import Path
 from typing import Protocol
 
-log = logging.getLogger("sante.mail")
+log = logging.getLogger("hollic.mail")
 
-MAIL_FROM = os.getenv("MAIL_FROM", "Santé Saúde <no-reply@sante-saude.example>")
+MAIL_FROM = os.getenv("MAIL_FROM", "Hollic Health <no-reply@hollic-health.example>")
 
 
 class EmailSender(Protocol):

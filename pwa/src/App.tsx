@@ -9,8 +9,6 @@ import { RecoveryPage } from './pages/RecoveryPage'
 import { HomeBase } from './pages/HomeBase'
 import { HomePage } from './pages/HomePage'
 import { AppointmentsPage } from './pages/AppointmentsPage'
-import { PlanPage } from './pages/PlanPage'
-import { WalletPage } from './pages/WalletPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { EditProfilePage } from './pages/EditProfilePage'
 import { EditAddressPage } from './pages/EditAddressPage'
@@ -35,26 +33,24 @@ export default function App() {
               <Route element={<GuestRoute />}>
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/recuperar" element={<RecoveryPage />} />
+                <Route path="/recover" element={<RecoveryPage />} />
               </Route>
 
               <Route element={<ProtectedRoute />}>
                 <Route path="/app" element={<HomeBase />}>
                   <Route index element={<HomePage />} />
-                  <Route path="agendamentos" element={<AppointmentsPage />} />
-                  <Route path="plano" element={<PlanPage />} />
-                  <Route path="carteira" element={<WalletPage />} />
-                  <Route path="perfil" element={<ProfilePage />} />
+                  <Route path="appointments" element={<AppointmentsPage />} />
+                  <Route path="profile" element={<ProfilePage />} />
                 </Route>
-                <Route path="/app/notificacoes" element={<NotificationsPage />} />
-                <Route path="/app/rede" element={<AccreditedPage />} />
-                <Route path="/app/parceiros" element={<PartnersPage />} />
-                <Route path="/app/agendar" element={<SchedulePage />} />
-                <Route path="/app/instalar" element={<InstallAppPage />} />
-                <Route path="/app/agendamentos/:id" element={<AppointmentViewPage />} />
-                <Route path="/app/perfil/dados" element={<EditProfilePage />} />
-                <Route path="/app/perfil/endereco" element={<EditAddressPage />} />
-                <Route path="/app/perfil/senha" element={<PasswordUpdatePage />} />
+                <Route path="/app/notifications" element={<NotificationsPage />} />
+                <Route path="/app/network" element={<AccreditedPage />} />
+                <Route path="/app/partners" element={<PartnersPage />} />
+                <Route path="/app/schedule" element={<SchedulePage />} />
+                <Route path="/app/install" element={<InstallAppPage />} />
+                <Route path="/app/appointments/:id" element={<AppointmentViewPage />} />
+                <Route path="/app/profile/details" element={<EditProfilePage />} />
+                <Route path="/app/profile/address" element={<EditAddressPage />} />
+                <Route path="/app/profile/password" element={<PasswordUpdatePage />} />
               </Route>
 
               <Route path="*" element={<Navigate to="/" replace />} />

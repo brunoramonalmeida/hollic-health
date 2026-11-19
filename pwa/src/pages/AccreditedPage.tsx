@@ -56,7 +56,7 @@ export function AccreditedPage() {
         if (active) setStates(Array.isArray(data) ? (data as NetworkState[]) : [])
       })
       .catch((err) => {
-        if (active) setError(err?.message || 'Falha ao carregar rede credenciada')
+        if (active) setError(err?.message || 'Could not load the accredited network')
       })
       .finally(() => {
         if (active) setLoading(false)
@@ -88,11 +88,11 @@ export function AccreditedPage() {
 
   return (
     <div className="page">
-      <BackHeader title="Rede credenciada" />
+      <BackHeader title="Accredited network" />
       <div className="list-page">
         <div className="filter-row">
           <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
-            <option value="ALL">Todos os estados</option>
+            <option value="ALL">All states</option>
             {stateOptions.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -100,7 +100,7 @@ export function AccreditedPage() {
             ))}
           </select>
           <input
-            placeholder="Buscar..."
+            placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -116,14 +116,14 @@ export function AccreditedPage() {
           list.map((a) => (
             <article key={`${a.id}-${a.city}`} className="list-card">
               <h3>{a.name}</h3>
-              <p>{a.specialties.slice(0, 4).join(' · ') || 'Especialidades'}</p>
+              <p>{a.specialties.slice(0, 4).join(' · ') || 'Specialties'}</p>
               <p>
                 {a.city}/{a.state}
               </p>
             </article>
           ))}
         {!loading && !error && list.length === 0 && (
-          <div className="empty-state">Nenhum credenciado encontrado</div>
+          <div className="empty-state">No accredited clinics found</div>
         )}
       </div>
     </div>

@@ -20,7 +20,7 @@ Delivery guarantees, layer by layer:
    the relay republishes it when due. After ``max_attempts`` the job is
    ``dead`` and administrators can retry it from the queue page.
 5. **Dead-letter queue.** Messages that cannot even be parsed (no job id, job
-   missing) are rejected without requeue and land in ``sante.jobs.dead``
+   missing) are rejected without requeue and land in ``hollic.jobs.dead``
    through the dead-letter exchange, for inspection.
 
 ``BROKER_URL=amqp://user:pass@host:5672/%2F`` selects RabbitMQ (``pika`` is
@@ -34,11 +34,11 @@ import os
 from dataclasses import dataclass, field
 from typing import Callable
 
-log = logging.getLogger("sante.broker")
+log = logging.getLogger("hollic.broker")
 
 BROKER_URL = os.getenv("BROKER_URL", "memory")
-EXCHANGE = os.getenv("BROKER_EXCHANGE", "sante")
-QUEUE = os.getenv("BROKER_QUEUE", "sante.jobs")
+EXCHANGE = os.getenv("BROKER_EXCHANGE", "hollic")
+QUEUE = os.getenv("BROKER_QUEUE", "hollic.jobs")
 DEAD_QUEUE = f"{QUEUE}.dead"
 DEAD_EXCHANGE = f"{EXCHANGE}.dlx"
 PREFETCH = int(os.getenv("BROKER_PREFETCH", "10"))

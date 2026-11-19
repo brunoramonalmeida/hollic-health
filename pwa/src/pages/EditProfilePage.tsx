@@ -27,25 +27,25 @@ export function EditProfilePage() {
     const result = await updateUser(form)
     setLoading(false)
     if (!result.ok) {
-      setError(result.message || 'Falha ao salvar')
+      setError(result.message || 'Could not save')
       return
     }
     setSaved(true)
-    setTimeout(() => navigate('/app/perfil'), 800)
+    setTimeout(() => navigate('/app/profile'), 800)
   }
 
   return (
     <div className="page">
-      <BackHeader title="Meus dados" />
+      <BackHeader title="My details" />
       <form className="edit-form form-stack" onSubmit={handleSubmit}>
         {(
           [
-            ['name', 'Nome completo'],
-            ['email', 'E-mail'],
-            ['phone', 'Telefone'],
+            ['name', 'Full name'],
+            ['email', 'Email'],
+            ['phone', 'Phone'],
             ['cpf', 'CPF'],
-            ['rg', 'RG'],
-            ['birthDate', 'Data de nascimento'],
+            ['rg', 'ID'],
+            ['birthDate', 'Date of birth'],
           ] as const
         ).map(([key, label]) => (
           <div key={key} className="form-field form-field--dark">
@@ -58,23 +58,23 @@ export function EditProfilePage() {
           </div>
         ))}
         <div className="form-field form-field--dark">
-          <label htmlFor="maritalStatus">Estado civil</label>
+          <label htmlFor="maritalStatus">Marital status</label>
           <select
             id="maritalStatus"
             value={form.maritalStatus}
             onChange={(e) => setForm((f) => ({ ...f, maritalStatus: e.target.value }))}
           >
-            <option value="">Selecione</option>
-            <option>Solteiro(a)</option>
-            <option>Casado(a)</option>
-            <option>Divorciado(a)</option>
-            <option>Viúvo(a)</option>
+            <option value="">Select</option>
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+            <option>Widowed</option>
           </select>
         </div>
         {error && <p className="form-error">{error}</p>}
-        {saved && <p style={{ color: 'var(--success)', fontWeight: 600 }}>Dados salvos!</p>}
+        {saved && <p style={{ color: 'var(--success)', fontWeight: 600 }}>Details saved</p>}
         <Button type="submit" loading={loading}>
-          Salvar
+          Save
         </Button>
       </form>
     </div>

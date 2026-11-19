@@ -35,8 +35,8 @@ export function HomePage() {
       <div className="home__intro">
         <img src="/assets/icons/card.svg" alt="" />
         <p>
-          <span className="text-destak">Tudo que você precisa em um só lugar. </span>
-          Consultas e Exames com até 70% de descontos em até 3x no cartão*
+          <span className="text-destak">Everything you need in one place. </span>
+          Appointments and tests with up to 70% off, in up to 3 card installments*
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export function HomePage() {
         <button
           type="button"
           className="menu-card menu-card--primary"
-          onClick={() => navigate('/app/agendar')}
+          onClick={() => navigate('/app/schedule')}
         >
           <img
             src="/assets/icons/appointments_icon_filled.svg"
@@ -75,40 +75,35 @@ export function HomePage() {
                 'brightness(0) saturate(100%) invert(8%) sepia(28%) saturate(1800%) hue-rotate(192deg)',
             }}
           />
-          <span>Agende{'\n'}sua consulta</span>
+          <span>Book{'\n'}an appointment</span>
         </button>
         <button
           type="button"
           className="menu-card menu-card--secondary"
-          onClick={() => navigate('/app/rede')}
+          onClick={() => navigate('/app/network')}
         >
           <img src="/assets/images/accredited_network.svg" alt="" />
-          <span>Rede{'\n'}credenciada</span>
+          <span>Accredited{'\n'}network</span>
         </button>
         <button
           type="button"
           className="menu-card menu-card--secondary"
-          onClick={() => navigate('/app/parceiros')}
+          onClick={() => navigate('/app/partners')}
         >
           <img src="/assets/images/partners.svg" alt="" />
-          <span>Nossos{'\n'}parceiros</span>
+          <span>Our{'\n'}partners</span>
         </button>
       </div>
 
       <p className="home__info">
-        Agendamento ágil e prático de
-        <br /> diversas especialidades médicas.
+        Quick, simple booking across
+        <br /> many medical specialties.
       </p>
 
       {showInstallUi && (
         <div style={{ padding: '10px 20px 0' }}>
-          <Button variant="icon" onClick={() => navigate('/app/instalar')}>
-            <img
-              src="/assets/icons/icon-192.png"
-              alt=""
-              style={{ width: 22, height: 22, borderRadius: 4 }}
-            />
-            Adicionar à tela inicial
+          <Button variant="icon" onClick={() => navigate('/app/install')}>
+            Add to home screen
           </Button>
         </div>
       )}
@@ -119,17 +114,17 @@ export function HomePage() {
           onClick={() => window.open(`https://wa.me/${WHATSAPP}`, '_blank')}
         >
           <img src="/assets/images/icon_phone.svg" alt="" />
-          Atendimento: {WHATSAPP_LABEL}
+          Support: {WHATSAPP_LABEL}
         </Button>
       </div>
 
       <p className="home__about">
-        A <strong>Santé</strong>, tem como objetivo a inclusão social de todos, oferecendo
-        assistência à saúde de qualidade aos seus colaboradores por um preço acessível.
+        <strong>Hollic Health</strong> aims to include everyone, offering
+        quality healthcare to its members at an affordable price.
         <strong>
           {' '}
-          Preservar a saúde e a qualidade de vida das pessoas, a partir de um atendimento
-          diferenciado, profissional, ético, humano e personalizado.
+          We look after people’s health and quality of life with care that is
+          professional, ethical, human and personal.
         </strong>
       </p>
     </div>

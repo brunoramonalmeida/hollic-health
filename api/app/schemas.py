@@ -131,7 +131,7 @@ class ClinicIn(AddressIn):
     on_call_fee_cents: int | None = Field(default=None, ge=0)
     # Fee on remote appointments (no room is used: may be 0); null = same as fee_cents.
     remote_fee_cents: int | None = Field(default=None, ge=0)
-    # Capacity reserved for Santé Saúde (0 = unlimited): bookings stop here.
+    # Capacity reserved for Hollic Health (0 = unlimited): bookings stop here.
     daily_limit: int = Field(ge=0, default=0)
     monthly_limit: int = Field(ge=0, default=0)
 
@@ -231,7 +231,7 @@ class ProfessionalIn(BaseModel):
     # rate, null = the regular fee.
     remote_enabled: bool = False
     remote_price_cents: int | None = Field(default=None, ge=0)
-    # Capacity reserved for Santé Saúde (0 = unlimited): the professional also
+    # Capacity reserved for Hollic Health (0 = unlimited): the professional also
     # has appointments outside the network, so bookings stop at these counts.
     daily_limit: int = Field(ge=0, default=0)
     monthly_limit: int = Field(ge=0, default=0)

@@ -31,7 +31,7 @@ export function setSessionExpiredHandler(handler: SessionExpiredHandler | null) 
 
 function getStoredAuthHeader(): string | null {
   try {
-    const raw = localStorage.getItem('sante_pwa_session')
+    const raw = localStorage.getItem('hollic_pwa_session')
     if (!raw) return null
     const session = JSON.parse(raw) as { token_type?: string; token?: string }
     if (!session.token) return null
@@ -101,7 +101,7 @@ export async function apiRequest<T = unknown>(
 
   if (response.status === 401 && auth) {
     onSessionExpired?.()
-    throw new ApiError(401, 'Sessão expirada. Faça login novamente.')
+    throw new ApiError(401, 'Your session has expired. Please sign in again.')
   }
 
   if (response.status === 204) {

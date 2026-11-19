@@ -20,7 +20,7 @@ export function RecoveryPage() {
       await forgotPasswordRequest(email)
       setSent(true)
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Não foi possível enviar o e-mail.')
+      setError(err instanceof ApiError ? err.message : 'Could not send the email.')
     } finally {
       setLoading(false)
     }
@@ -28,24 +28,24 @@ export function RecoveryPage() {
 
   return (
     <div className="page">
-      <BackHeader title="Recuperar senha" onBack={() => navigate('/login')} />
+      <BackHeader title="Reset password" onBack={() => navigate('/login')} />
       <div className="edit-form">
         {sent ? (
           <div className="success-page" style={{ minHeight: 'auto', padding: 16 }}>
-            <img src="/assets/images/emblem.svg" alt="" style={{ width: 72 }} />
-            <h1>E-mail enviado!</h1>
+            <p className="brand-word">Hollic Health</p>
+            <h1>Email sent</h1>
             <p>
-              Se o e-mail estiver cadastrado, você receberá instruções para redefinir sua senha.
+              If that email is on file, you will get instructions to reset your password.
             </p>
-            <Button onClick={() => navigate('/login')}>Voltar ao login</Button>
+            <Button onClick={() => navigate('/login')}>Back to sign in</Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
             <p style={{ marginBottom: 16, fontSize: 14, lineHeight: 1.45 }}>
-              Informe o e-mail da sua conta para receber o link de recuperação.
+              Enter your account email to receive the reset link.
             </p>
             <div className="form-field form-field--dark">
-              <label htmlFor="recovery-email">E-mail</label>
+              <label htmlFor="recovery-email">Email</label>
               <input
                 id="recovery-email"
                 type="email"
@@ -56,7 +56,7 @@ export function RecoveryPage() {
             </div>
             {error && <p className="form-error">{error}</p>}
             <Button type="submit" loading={loading}>
-              Enviar
+              Send
             </Button>
           </form>
         )}

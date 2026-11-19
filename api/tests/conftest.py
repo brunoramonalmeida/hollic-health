@@ -9,6 +9,10 @@ from datetime import datetime
 TEST_ENV = {
     "DATABASE_URL": "sqlite://",
     "BROKER_URL": "memory",
+    "BROKER_EXCHANGE": "hollic",
+    "BROKER_QUEUE": "hollic.jobs",
+    "BROKER_PREFETCH": "10",
+    "MAIL_FROM": "Hollic Health <no-reply@hollic-health.example>",
     "MAIL_BACKEND": "memory",
     "WORKER_ENABLED": "0",
     "WORKER_INTERVAL_SECONDS": "30",
@@ -22,13 +26,13 @@ TEST_ENV = {
     "CHECKIN_OPENS_BEFORE_MINUTES": "120",
     "CHECKIN_CLOSES_AFTER_MINUTES": "120",
     # Prescription files go to a throw-away directory of this run.
-    "PRESCRIPTIONS_DIR": tempfile.mkdtemp(prefix="sante-prescriptions-"),
+    "PRESCRIPTIONS_DIR": tempfile.mkdtemp(prefix="hollic-prescriptions-"),
     "PRESCRIPTION_MAX_BYTES": "10485760",
-    "CHAT_ATTACHMENTS_DIR": tempfile.mkdtemp(prefix="sante-chat-"),
+    "CHAT_ATTACHMENTS_DIR": tempfile.mkdtemp(prefix="hollic-chat-"),
     "CHAT_ATTACHMENT_MAX_BYTES": "10485760",
     "PRESCRIPTION_LINK_DAYS": "30",
     # The trust bundle of the test PKI (written by tests/pki.py on first use).
-    "ICP_BRASIL_TRUST_BUNDLE": os.path.join(tempfile.mkdtemp(prefix="sante-pki-"), "roots.pem"),
+    "ICP_BRASIL_TRUST_BUNDLE": os.path.join(tempfile.mkdtemp(prefix="hollic-pki-"), "roots.pem"),
     "ICP_BRASIL_POLICY_OID": "",
     "ICP_BRASIL_POLICY_URL": "",
     "ICP_BRASIL_POLICY_SHA256": "",

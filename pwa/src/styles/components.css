@@ -4,7 +4,7 @@
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   background: var(--white);
   border-top: 1px solid var(--divider);
@@ -16,7 +16,7 @@
 }
 
 html.is-pwa .bottom-nav {
-  /* iOS às vezes reporta 0; garante espaço do home indicator */
+  /* iOS sometimes reports 0; keep room for the home indicator */
   padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px);
   min-height: calc(var(--nav-height) + max(env(safe-area-inset-bottom, 0px), 20px));
 }
@@ -55,9 +55,12 @@ html.is-pwa .bottom-nav {
 }
 
 .app-bar__logo {
-  height: 42px;
-  width: auto;
-  margin: 0 auto;
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--primary);
 }
 
 .app-bar__notify {
@@ -139,8 +142,12 @@ html.is-pwa .home-layout__content {
   );
 }
 
-.splash img {
-  width: min(70%, 260px);
+.splash__name {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
 }
 
 /* Welcome */
@@ -159,8 +166,12 @@ html.is-pwa .home-layout__content {
   justify-content: center;
 }
 
-.welcome__logo img {
-  height: 90px;
+.welcome__name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--primary);
 }
 
 .welcome__body {
@@ -224,8 +235,11 @@ html.is-pwa .home-layout__content {
 }
 
 .login__logo {
-  height: 56px;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
 }
 
 .login__hint {
@@ -891,12 +905,21 @@ html.is-pwa .home-layout__content {
   text-align: center;
 }
 
-.install-app__icon {
-  width: 84px;
-  height: 84px;
-  border-radius: 18px;
+.brand-word {
+  margin: 8px 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+  text-align: center;
+}
+
+.install-app__name {
   margin: 8px auto 16px;
-  box-shadow: 0 8px 24px rgba(10, 24, 61, 0.18);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--primary);
 }
 
 .install-app h2 {

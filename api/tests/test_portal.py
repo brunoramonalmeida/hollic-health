@@ -102,7 +102,7 @@ def test_a_deactivated_company_loses_its_access_at_once(ctx):
     ctx.client.put(f"/partners/{ctx.acme['id']}", headers=ctx.admin, json={"name": ctx.acme["name"], "active": False})
     response = ctx.client.get("/portal", headers=ctx.hr)
     assert response.status_code == 401
-    assert response.json()["detail"] == "Your company's access was deactivated; contact Santé Saúde"
+    assert response.json()["detail"] == "Your company's access was deactivated; contact Hollic Health"
     refused = ctx.client.post("/auth/token", json={"email": f"hr{ctx.acme['id']}@company.example", "password": "saude123"})
     assert refused.status_code == 401
 
@@ -254,7 +254,7 @@ def test_a_customer_with_a_personal_plan_is_moved_by_the_staff(ctx):
         json={"customer_id": holder["id"], "modality_id": ctx.plan["id"], "joined_on": "2026-09-01", "expires_on": "2027-08-31"},
     )
     refused = ctx.enroll(ctx.hr, ctx.terms["id"], name="Carla Client", document="111.222.333-44", expect=409)
-    assert "contact Santé Saúde to move it into your agreement" in refused["detail"]
+    assert "contact Hollic Health to move it into your agreement" in refused["detail"]
 
 
 def test_the_company_enrolls_its_employees_in_the_next_contract_ahead(ctx):

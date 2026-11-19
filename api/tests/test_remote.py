@@ -156,7 +156,7 @@ def test_remote_appointment_takes_a_regular_slot_and_gets_a_meeting_link(ctx):
     assert created.status_code == 201, created.text
     item = created.json()
     assert item["remote"] is True and item["on_call"] is False and item["urgent"] is False
-    assert item["meeting_url"].startswith("https://meet.jit.si/SanteSaude-")
+    assert item["meeting_url"].startswith("https://meet.jit.si/HollicHealth-")
     # Every remote appointment has its own room.
     other = ctx.book(MON_10).json()
     assert other["meeting_url"] != item["meeting_url"]

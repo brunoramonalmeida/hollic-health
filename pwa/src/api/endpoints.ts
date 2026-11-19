@@ -30,8 +30,6 @@ export const endpoints = {
   specialties: `${APP_V1}/specialties`,
   services: `${APP_V1}/services`,
   paymentMethods: `${APP_V1}/payment-methods`,
-  subscriptions: `${APP_V1}/subscriptions`,
-  santeCard: `${APP_V1}/sante-card`,
   addresses: `${APP_V1}/addresses`,
   address: (id: number | string) => `${APP_V1}/addresses/${id}`,
   accreditedNetwork: `${APP_V1}/accredited-network`,

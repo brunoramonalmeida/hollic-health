@@ -22,7 +22,7 @@ import secrets
 
 # Base of the generated meeting links; a unique room name is appended.
 MEETING_BASE_URL = os.getenv("REMOTE_MEETING_BASE_URL", "https://meet.jit.si").rstrip("/")
-ROOM_PREFIX = "SanteSaude"
+ROOM_PREFIX = "HollicHealth"
 MAX_URL_LENGTH = 500
 
 

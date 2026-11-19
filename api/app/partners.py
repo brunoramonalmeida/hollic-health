@@ -24,7 +24,7 @@ minimum number of employees (``min_employees``), measured **per month**:
 the headcount of a month is how many employees (holders; dependents do not
 count) have a fee of the agreement **due in that month**. The employees
 always get the negotiated conditions; for every month whose headcount is
-below the minimum, the company pays Santé Saúde **the difference** — the
+below the minimum, the company pays Hollic Health **the difference** — the
 discounts granted on that month's fees (``shortfall``). The shortfall of a
 month is projected while the month runs and due once it ended (on day
 ``SHORTFALL_DUE_DAY`` of the next month); its payment is recorded with the

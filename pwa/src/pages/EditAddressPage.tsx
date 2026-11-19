@@ -43,7 +43,7 @@ export function EditAddressPage() {
   }, [])
 
   const sortedCities = useMemo(
-    () => [...cities].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR')),
+    () => [...cities].sort((a, b) => a.name.localeCompare(b.name, 'en')),
     [cities],
   )
 
@@ -72,9 +72,9 @@ export function EditAddressPage() {
       }
       updateAddress(form)
       await refreshAddresses()
-      navigate('/app/perfil')
+      navigate('/app/profile')
     } catch (err) {
-      setError(err instanceof ApiError || err instanceof Error ? err.message : 'Falha ao salvar endereço')
+      setError(err instanceof ApiError || err instanceof Error ? err.message : 'Could not save the address')
     } finally {
       setLoading(false)
     }
@@ -82,10 +82,10 @@ export function EditAddressPage() {
 
   return (
     <div className="page">
-      <BackHeader title="Endereço" />
+      <BackHeader title="Address" />
       <form className="edit-form form-stack" onSubmit={handleSubmit}>
         <div className="form-field form-field--dark">
-          <label htmlFor="zipCode">CEP</label>
+          <label htmlFor="zipCode">ZIP code</label>
           <input
             id="zipCode"
             value={form.zipCode}
@@ -94,7 +94,7 @@ export function EditAddressPage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="street">Rua</label>
+          <label htmlFor="street">Street</label>
           <input
             id="street"
             value={form.street}
@@ -103,7 +103,7 @@ export function EditAddressPage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="number">Número</label>
+          <label htmlFor="number">Number</label>
           <input
             id="number"
             value={form.number}
@@ -112,7 +112,7 @@ export function EditAddressPage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="complement">Complemento</label>
+          <label htmlFor="complement">Complement</label>
           <input
             id="complement"
             value={form.complement}
@@ -120,7 +120,7 @@ export function EditAddressPage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="neighborhood">Bairro</label>
+          <label htmlFor="neighborhood">Neighborhood</label>
           <input
             id="neighborhood"
             value={form.neighborhood}
@@ -129,7 +129,7 @@ export function EditAddressPage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="cityId">Cidade</label>
+          <label htmlFor="cityId">City</label>
           <select
             id="cityId"
             value={form.cityId || ''}
@@ -137,7 +137,7 @@ export function EditAddressPage() {
             required
             disabled={loadingCities}
           >
-            <option value="">{loadingCities ? 'Carregando...' : 'Selecione'}</option>
+            <option value="">{loadingCities ? 'Loading...' : 'Select'}</option>
             {sortedCities.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -147,12 +147,12 @@ export function EditAddressPage() {
           </select>
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="state">UF</label>
+          <label htmlFor="state">State</label>
           <input id="state" value={form.state} disabled />
         </div>
         {error && <p className="form-error">{error}</p>}
         <Button type="submit" loading={loading}>
-          Salvar endereço
+          Save address
         </Button>
       </form>
     </div>

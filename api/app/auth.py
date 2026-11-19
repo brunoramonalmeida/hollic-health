@@ -81,7 +81,7 @@ def get_current_user(
 
 
 INACTIVE_SELLER = "Your seller access was deactivated; contact the company"
-INACTIVE_PARTNER = "Your company's access was deactivated; contact Santé Saúde"
+INACTIVE_PARTNER = "Your company's access was deactivated; contact Hollic Health"
 
 
 def ensure_access_active(user: User) -> None:

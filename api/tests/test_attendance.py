@@ -184,7 +184,7 @@ def test_company_address(ctx):
     saved = ctx.client.put(
         "/company",
         headers=ctx.admin,
-        json={"name": "Santé Saúde Ltda", "city": "Sample", "state": "SP", "street": "Av. Central", "number": "10", "zip_code": "01000-000", "latitude": -23.5, "longitude": -46.6},
+        json={"name": "Hollic Health Ltda", "city": "Sample", "state": "SP", "street": "Av. Central", "number": "10", "zip_code": "01000-000", "latitude": -23.5, "longitude": -46.6},
     )
     assert saved.status_code == 200, saved.text
     assert saved.json()["address"] == "Av. Central, 10, Sample/SP, 01000-000"

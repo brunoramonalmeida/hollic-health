@@ -81,7 +81,7 @@ export function SchedulePage() {
       })
       .catch((err) => {
         if (!active) return
-        setError(err instanceof ApiError ? err.message : 'Falha ao iniciar agendamento')
+        setError(err instanceof ApiError ? err.message : 'Could not start booking')
         setStep('checkout')
       })
       .finally(() => {
@@ -122,7 +122,7 @@ export function SchedulePage() {
       setPaymentMethodId(methods[0]?.id ?? '')
       setStep('form')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Falha ao carregar dados do agendamento')
+      setError(err instanceof ApiError ? err.message : 'Could not load booking details')
     } finally {
       setLoading(false)
     }
@@ -131,7 +131,7 @@ export function SchedulePage() {
   function goResume(e: FormEvent) {
     e.preventDefault()
     if (!clinicId || !date) {
-      setError('Preencha clínica e data.')
+      setError('Fill in the clinic and the date.')
       return
     }
     setError('')
@@ -140,7 +140,7 @@ export function SchedulePage() {
 
   async function confirm() {
     if (!typeId || !clinicId || !paymentMethodId) {
-      setError('Dados incompletos para agendar.')
+      setError('Some details are still missing.')
       return
     }
     setLoading(true)
@@ -169,7 +169,7 @@ export function SchedulePage() {
       await refreshAppointments()
       setStep('success')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Falha no agendamento')
+      setError(err instanceof ApiError ? err.message : 'Booking failed')
     } finally {
       setLoading(false)
     }
@@ -178,7 +178,7 @@ export function SchedulePage() {
   if (loading && step === 'checkout') {
     return (
       <div className="page">
-        <BackHeader title="Agendar" />
+        <BackHeader title="Book" />
         <div className="empty-state">
           <div className="spinner" />
         </div>
@@ -189,11 +189,11 @@ export function SchedulePage() {
   if (step === 'success') {
     return (
       <div className="page success-page">
-        <img src="/assets/images/emblem.svg" alt="" style={{ width: 80 }} />
-        <h1>Agendamento realizado!</h1>
-        <p>Seu atendimento foi agendado com sucesso. Acompanhe na aba Agendamento.</p>
-        <Button onClick={() => navigate('/app/agendamentos', { replace: true })}>
-          Ver agendamentos
+        <p className="brand-word">Hollic Health</p>
+        <h1>Appointment booked</h1>
+        <p>Your visit is booked. Follow it on the Appointments tab.</p>
+        <Button onClick={() => navigate('/app/appointments', { replace: true })}>
+          View appointments
         </Button>
       </div>
     )
@@ -204,12 +204,12 @@ export function SchedulePage() {
       <BackHeader
         title={
           step === 'checkout'
-            ? 'Agendar'
+            ? 'Book'
             : step === 'type'
-              ? 'Tipo de atendimento'
+              ? 'Visit type'
               : step === 'form'
-                ? 'Agendar consulta'
-                : 'Resumo'
+                ? 'Book an appointment'
+                : 'Summary'
         }
         onBack={() => {
           if (step === 'form') setStep('type')
@@ -223,15 +223,15 @@ export function SchedulePage() {
         {step === 'checkout' && (
           <div>
             <div className="resume-box">
-              <h3 style={{ color: 'var(--secondary)', marginBottom: 8 }}>Não é possível agendar</h3>
-              {(checkoutErrors.length ? checkoutErrors : [error || 'Verifique seus dados cadastrais.']).map(
+              <h3 style={{ color: 'var(--secondary)', marginBottom: 8 }}>Booking is not available</h3>
+              {(checkoutErrors.length ? checkoutErrors : [error || 'Check your account details.']).map(
                 (msg) => (
                   <p key={msg}>• {msg}</p>
                 ),
               )}
             </div>
-            <Button variant="secondary" onClick={() => navigate('/app/perfil')}>
-              Ir para o perfil
+            <Button variant="secondary" onClick={() => navigate('/app/profile')}>
+              Go to profile
             </Button>
           </div>
         )}
@@ -252,11 +252,11 @@ export function SchedulePage() {
               ))}
             </div>
             {!categories.length && (
-              <div className="empty-state">Nenhum tipo de atendimento disponível</div>
+              <div className="empty-state">No visit types available</div>
             )}
             <div style={{ marginTop: 24 }}>
               <Button disabled={!typeId} loading={loading} onClick={() => void goForm()}>
-                Continuar
+                Continue
               </Button>
             </div>
           </>
@@ -266,7 +266,7 @@ export function SchedulePage() {
           <form className="form-stack" onSubmit={goResume}>
             {(needed?.clinics || []).length > 0 && (
               <div className="form-field form-field--dark">
-                <label>Clínica</label>
+                <label>Clinic</label>
                 <select
                   value={clinicId}
                   onChange={(e) => setClinicId(Number(e.target.value))}
@@ -282,7 +282,7 @@ export function SchedulePage() {
             )}
             {(needed?.specialties || []).length > 0 && (
               <div className="form-field form-field--dark">
-                <label>Especialidade</label>
+                <label>Specialty</label>
                 <select
                   value={specialtyId}
                   onChange={(e) => setSpecialtyId(Number(e.target.value))}
@@ -297,7 +297,7 @@ export function SchedulePage() {
             )}
             {(needed?.professionals || []).length > 0 && (
               <div className="form-field form-field--dark">
-                <label>Profissional</label>
+                <label>Professional</label>
                 <select
                   value={professionalId}
                   onChange={(e) => setProfessionalId(Number(e.target.value))}
@@ -312,7 +312,7 @@ export function SchedulePage() {
             )}
             {(needed?.services || []).length > 0 && (
               <div className="form-field form-field--dark">
-                <label>Serviço</label>
+                <label>Service</label>
                 <select value={serviceId} onChange={(e) => setServiceId(Number(e.target.value))}>
                   {needed?.services?.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -325,7 +325,7 @@ export function SchedulePage() {
             )}
             {(needed?.payment_methods || []).length > 0 && (
               <div className="form-field form-field--dark">
-                <label>Forma de pagamento</label>
+                <label>Payment method</label>
                 <select
                   value={paymentMethodId}
                   onChange={(e) => setPaymentMethodId(Number(e.target.value))}
@@ -340,7 +340,7 @@ export function SchedulePage() {
               </div>
             )}
             <div className="form-field form-field--dark">
-              <label>Data</label>
+              <label>Date</label>
               <input
                 type="date"
                 required
@@ -350,10 +350,10 @@ export function SchedulePage() {
               />
             </div>
             <div className="form-field form-field--dark">
-              <label>Horário</label>
+              <label>Time</label>
               <input type="time" value={time} onChange={(e) => setTime(e.target.value)} required />
             </div>
-            <Button type="submit">Revisar agendamento</Button>
+            <Button type="submit">Review appointment</Button>
           </form>
         )}
 
@@ -361,22 +361,22 @@ export function SchedulePage() {
           <>
             <div className="resume-box">
               <p>
-                <strong>Tipo:</strong> {selectedType?.name}
+                <strong>Type:</strong> {selectedType?.name}
               </p>
               <p>
-                <strong>Paciente:</strong> {user?.name}
+                <strong>Patient:</strong> {user?.name}
               </p>
               <p>
-                <strong>Clínica:</strong>{' '}
+                <strong>Clinic:</strong>{' '}
                 {needed?.clinics?.find((c) => c.id === clinicId)?.name || '—'}
               </p>
               <p>
-                <strong>Profissional:</strong>{' '}
+                <strong>Professional:</strong>{' '}
                 {needed?.professionals?.find((p) => p.id === professionalId)?.name || '—'}
               </p>
               <p>
-                <strong>Data/Hora:</strong>{' '}
-                {new Date(`${date}T${time}:00`).toLocaleString('pt-BR', {
+                <strong>Date and time:</strong>{' '}
+                {new Date(`${date}T${time}:00`).toLocaleString('en-US', {
                   day: '2-digit',
                   month: '2-digit',
                   year: 'numeric',
@@ -385,11 +385,11 @@ export function SchedulePage() {
                 })}
               </p>
               <p>
-                <strong>Valor:</strong> R$ {amount.toFixed(2).replace('.', ',')}
+                <strong>Amount:</strong> R$ {amount.toFixed(2)}
               </p>
             </div>
             <Button loading={loading} onClick={() => void confirm()}>
-              Confirmar agendamento
+              Confirm appointment
             </Button>
           </>
         )}

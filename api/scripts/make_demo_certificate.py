@@ -31,7 +31,7 @@ PEOPLE = (("lorem-ipsum", "Lorem Ipsum", "12345678909"), ("dolor-sit", "Dolor Si
 def main():
     folder = Path(__file__).resolve().parents[1] / "demo-ca"
     folder.mkdir(exist_ok=True)
-    root = make_root("AC Raiz demo Sante Saude")
+    root = make_root("AC Raiz demo Hollic Health")
     intermediate = make_intermediate(root, "AC demo de Pessoas")
     (folder / "roots.pem").write_bytes(root.pem())
     for slug, name, cpf in PEOPLE:

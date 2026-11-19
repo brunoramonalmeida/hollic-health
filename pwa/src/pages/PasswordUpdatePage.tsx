@@ -17,29 +17,29 @@ export function PasswordUpdatePage() {
     e.preventDefault()
     setError('')
     if (next.length < 6) {
-      setError('A nova senha deve ter ao menos 6 caracteres.')
+      setError('The new password must be at least 6 characters.')
       return
     }
     if (next !== confirm) {
-      setError('As senhas não coincidem.')
+      setError('The passwords do not match.')
       return
     }
     setLoading(true)
     const result = await changePassword(current, next, confirm)
     setLoading(false)
     if (!result.ok) {
-      setError(result.message || 'Falha ao atualizar senha')
+      setError(result.message || 'Could not update the password')
       return
     }
-    navigate('/app/perfil')
+    navigate('/app/profile')
   }
 
   return (
     <div className="page">
-      <BackHeader title="Alterar Senha" />
+      <BackHeader title="Change password" />
       <form className="edit-form form-stack" onSubmit={handleSubmit}>
         <div className="form-field form-field--dark">
-          <label htmlFor="current">Senha atual</label>
+          <label htmlFor="current">Current password</label>
           <input
             id="current"
             type="password"
@@ -49,7 +49,7 @@ export function PasswordUpdatePage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="next">Nova senha</label>
+          <label htmlFor="next">New password</label>
           <input
             id="next"
             type="password"
@@ -59,7 +59,7 @@ export function PasswordUpdatePage() {
           />
         </div>
         <div className="form-field form-field--dark">
-          <label htmlFor="confirm">Confirmar nova senha</label>
+          <label htmlFor="confirm">Confirm new password</label>
           <input
             id="confirm"
             type="password"
@@ -70,7 +70,7 @@ export function PasswordUpdatePage() {
         </div>
         {error && <p className="form-error">{error}</p>}
         <Button type="submit" loading={loading}>
-          Atualizar senha
+          Update password
         </Button>
       </form>
     </div>

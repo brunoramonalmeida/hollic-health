@@ -1165,7 +1165,7 @@ def employee_changed_by_company(db: Session, row: Subscription, change: str, act
             EMPLOYEE_UPDATED,
             f"{partner} updated your corporate plan",
             f"{change}\nUpdated by {actor.name} ({partner}) in the company portal. "
-            "If anything is wrong, talk to your company or to Santé Saúde.",
+            "If anything is wrong, talk to your company or to Hollic Health.",
             f"/subscriptions/{row.id}",
         ),
     )
@@ -1210,7 +1210,7 @@ def employee_removed_by_company(db: Session, row: Subscription, actor: User, wit
 
 
 def user_created(db: Session, user: User) -> None:
-    body = f"Hello {user.name}, your access to Santé Saúde was created with the email {user.email}."
+    body = f"Hello {user.name}, your access to Hollic Health was created with the email {user.email}."
     if user.customer:
         body += f"\nYou can schedule appointments and manage the plan of {user.customer.name}."
     if user.partner:
@@ -1223,4 +1223,4 @@ def user_created(db: Session, user: User) -> None:
             f"\nYou sell as {user.seller.name} in region {user.seller.region.name}: register customers, "
             "record your sales and follow your commissions in your area."
         )
-    deliver(db, Message(USER_CREATED, "Your access to Santé Saúde", body, "/"), users=[user], emails=[user.email])
+    deliver(db, Message(USER_CREATED, "Your access to Hollic Health", body, "/"), users=[user], emails=[user.email])

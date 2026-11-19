@@ -28,11 +28,6 @@ def test_holder_logs_in_and_reads_the_app(client):
     assert client.get("/api/app/v1/user", headers=headers).json()["customer"]["id"] == customer["id"]
     assert client.get("/api/app/v1/appointments", headers=headers).json() == []
     assert client.get("/api/app/v1/checkout", headers=headers).json()["errors"]
-    card = client.get("/api/app/v1/sante-card", headers=headers)
-    assert card.status_code == 200, card.text
-    assert card.json()["holder"] == "Foo Holder"
-    assert card.json()["code"]
-    assert client.get("/api/app/v1/subscriptions", headers=headers).status_code == 404
     cities = client.get("/api/app/v1/cities", headers=headers)
     assert cities.status_code == 200
     assert any(item["name"] == "Sample" for item in cities.json())

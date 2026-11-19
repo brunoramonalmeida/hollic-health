@@ -1,12 +1,9 @@
 .DS_Store
 api/.venv
 api/.env
-api/sante.db
+api/hollic.db
 api/**/__pycache__
 api/.pytest_cache
-front/node_modules
-front/dist
-front/.env.local
 api/outbox
 api/prescriptions
 api/chat-attachments
@@ -15,8 +12,7 @@ api/demo-ca
 api/icp-brasil-roots.pem
 api/e2e.db
 api/e2e-prescriptions
-front/test-results
-front/playwright-report
+api/sante.db
 pwa/node_modules
 pwa/dist
 pwa/.env

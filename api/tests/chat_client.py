@@ -1,5 +1,5 @@
 """A test double of the browser side of the end-to-end chat: the same
-protocol ``front/src/chatCrypto.js`` implements (ECDH P-256 identity keys,
+protocol the browser implements (ECDH P-256 identity keys,
 ephemeral ECDH + HKDF-SHA256 + AES-256-GCM envelopes, AES-256-GCM messages
 and attachments with the conversation bound as associated data)."""
 
@@ -13,7 +13,7 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
-KEK_INFO = b"sante-saude chat v1 kek"
+KEK_INFO = b"hollic-health chat v1 kek"
 
 
 def b64(data: bytes) -> str:
@@ -51,11 +51,11 @@ def kek(private_key, peer_jwk: dict) -> bytes:
 
 
 def message_aad(conversation_id: int) -> bytes:
-    return f"sante-saude chat v1 message {conversation_id}".encode()
+    return f"hollic-health chat v1 message {conversation_id}".encode()
 
 
 def attachment_aad(conversation_id: int) -> bytes:
-    return f"sante-saude chat v1 attachment {conversation_id}".encode()
+    return f"hollic-health chat v1 attachment {conversation_id}".encode()
 
 
 class Party:

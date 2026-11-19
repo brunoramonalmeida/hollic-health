@@ -7,18 +7,18 @@ export function WelcomePage() {
   return (
     <div className="page page--white welcome">
       <div className="welcome__logo">
-        <img src="/assets/images/logo.svg" alt="Santé Saúde" />
+        <p className="welcome__name">Hollic Health</p>
       </div>
       <div className="welcome__body">
         <img src="/assets/images/vector_apresentation.svg" alt="" />
         <p>
-          Assine nosso plano e fique à vontade
-          <br /> para cuidar de sua saúde e de seus
-          <br /> familiares. <strong>Vem pra Santé!</strong>
+          Book your appointment and take care
+          <br /> of your health and your
+          <br /> family. <strong>Come to Hollic!</strong>
         </p>
       </div>
       <div className="welcome__actions">
-        <Button onClick={() => navigate('/login')}>Fazer Login</Button>
+        <Button onClick={() => navigate('/login')}>Log in</Button>
       </div>
     </div>
   )

@@ -22,7 +22,7 @@ from . import clock
 from .broker import Broker, PublishError
 from .models import QueueJob
 
-log = logging.getLogger("sante.queue")
+log = logging.getLogger("hollic.queue")
 
 PENDING = "pending"
 QUEUED = "queued"  # published to the broker, waiting for a consumer

@@ -134,17 +134,6 @@ export interface ApiTransaction {
   [key: string]: unknown
 }
 
-export interface ApiSanteCard {
-  holder: string
-  user_code: string
-  dependents: string[]
-  modality: string
-  description: string
-  services: string[]
-  accession_date: string
-  grace_period_ends_at: string
-}
-
 export interface ApiCategory {
   id: number
   name: string

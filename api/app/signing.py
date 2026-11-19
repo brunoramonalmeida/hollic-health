@@ -26,7 +26,7 @@ from .virtual_card import current_code, generate_secret, verify_code
 MAX_FAILURES = 5
 LOCK_MINUTES = 5
 MAX_IMAGE_BYTES = 300_000
-ISSUER = "Sante Saude"
+ISSUER = "Hollic Health"
 
 
 class SigningError(Exception):

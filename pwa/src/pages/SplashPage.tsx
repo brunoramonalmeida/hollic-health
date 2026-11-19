@@ -16,7 +16,7 @@ export function SplashPage() {
 
   return (
     <div className="page page--gradient splash">
-      <img className="fade-pulse" src="/assets/images/logo_splash.svg" alt="Santé Saúde" />
+      <p className="splash__name fade-pulse">Hollic Health</p>
     </div>
   )
 }

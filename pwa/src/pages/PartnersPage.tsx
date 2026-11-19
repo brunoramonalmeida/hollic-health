@@ -16,7 +16,7 @@ export function PartnersPage() {
         if (active) setPartners(Array.isArray(data) ? data : [])
       })
       .catch((err) => {
-        if (active) setError(err?.message || 'Falha ao carregar parceiros')
+        if (active) setError(err?.message || 'Could not load partners')
       })
       .finally(() => {
         if (active) setLoading(false)
@@ -28,7 +28,7 @@ export function PartnersPage() {
 
   return (
     <div className="page">
-      <BackHeader title="Nossos parceiros" />
+      <BackHeader title="Our partners" />
       <div className="list-page">
         {loading && (
           <div className="empty-state">
@@ -54,7 +54,7 @@ export function PartnersPage() {
             </article>
           ))}
         {!loading && !error && partners.length === 0 && (
-          <div className="empty-state">Nenhum parceiro encontrado</div>
+          <div className="empty-state">No partners found</div>
         )}
       </div>
     </div>

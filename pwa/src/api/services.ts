@@ -7,8 +7,6 @@ import type {
   ApiHighlight,
   ApiNotificationsResponse,
   ApiPartner,
-  ApiSanteCard,
-  ApiSubscription,
   AuthSession,
   CheckoutResponse,
 } from './types'
@@ -89,14 +87,6 @@ export async function fetchCheckout() {
 
 export async function fetchCategories() {
   return api.get<{ data?: ApiCategory[] } | ApiCategory[]>(endpoints.categories)
-}
-
-export async function fetchSubscription() {
-  return api.get<ApiSubscription>(endpoints.subscriptions)
-}
-
-export async function fetchSanteCard() {
-  return api.get<ApiSanteCard>(endpoints.santeCard)
 }
 
 export async function fetchAddresses() {

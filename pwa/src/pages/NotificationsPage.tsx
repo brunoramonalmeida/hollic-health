@@ -6,10 +6,10 @@ export function NotificationsPage() {
 
   return (
     <div className="page">
-      <BackHeader title="Notificações" />
+      <BackHeader title="Notifications" />
       <div className="list-page">
         {notifications.length === 0 ? (
-          <div className="empty-state">Nenhuma notificação</div>
+          <div className="empty-state">No notifications</div>
         ) : (
           notifications.map((n) => (
             <button
@@ -22,7 +22,7 @@ export function NotificationsPage() {
               <h3>{n.title}</h3>
               <p>{n.body}</p>
               <time>
-                {new Date(n.date).toLocaleString('pt-BR', {
+                {new Date(n.date).toLocaleString('en-US', {
                   day: '2-digit',
                   month: '2-digit',
                   year: 'numeric',

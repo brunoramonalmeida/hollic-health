@@ -33,7 +33,7 @@ export function AppointmentViewPage() {
         if (active) setAppointment(mapApiAppointment(data))
       })
       .catch((err) => {
-        if (active) setError(err instanceof ApiError ? err.message : 'Agendamento não encontrado')
+        if (active) setError(err instanceof ApiError ? err.message : 'Appointment not found')
       })
       .finally(() => {
         if (active) setLoading(false)
@@ -49,9 +49,9 @@ export function AppointmentViewPage() {
     try {
       await cancelAppointmentRequest(id)
       await refreshAppointments()
-      navigate('/app/agendamentos')
+      navigate('/app/appointments')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Não foi possível cancelar')
+      setError(err instanceof ApiError ? err.message : 'Could not cancel')
     } finally {
       setCanceling(false)
     }
@@ -60,7 +60,7 @@ export function AppointmentViewPage() {
   if (loading) {
     return (
       <div className="page">
-        <BackHeader title="Detalhes" />
+        <BackHeader title="Details" />
         <div className="empty-state">
           <div className="spinner" />
         </div>
@@ -71,36 +71,36 @@ export function AppointmentViewPage() {
   if (!appointment) {
     return (
       <div className="page">
-        <BackHeader title="Detalhes" />
-        <div className="empty-state">{error || 'Agendamento não encontrado'}</div>
+        <BackHeader title="Details" />
+        <div className="empty-state">{error || 'Appointment not found'}</div>
       </div>
     )
   }
 
   return (
     <div className="page">
-      <BackHeader title="Detalhes do agendamento" />
+      <BackHeader title="Appointment details" />
       <div className="schedule">
         {error && <p className="form-error">{error}</p>}
         <div className="resume-box">
           <p>
-            <strong>Tipo:</strong> {appointment.category}
+            <strong>Type:</strong> {appointment.category}
           </p>
           <p>
-            <strong>Paciente:</strong> {appointment.holder}
+            <strong>Patient:</strong> {appointment.holder}
           </p>
           <p>
-            <strong>Especialidade:</strong> {appointment.specialty}
+            <strong>Specialty:</strong> {appointment.specialty}
           </p>
           <p>
-            <strong>Clínica:</strong> {appointment.clinic}
+            <strong>Clinic:</strong> {appointment.clinic}
           </p>
           <p>
-            <strong>Profissional:</strong> {appointment.professional}
+            <strong>Professional:</strong> {appointment.professional}
           </p>
           <p>
-            <strong>Data:</strong>{' '}
-            {new Date(appointment.date).toLocaleString('pt-BR', {
+            <strong>Date:</strong>{' '}
+            {new Date(appointment.date).toLocaleString('en-US', {
               day: '2-digit',
               month: '2-digit',
               year: 'numeric',
@@ -109,10 +109,10 @@ export function AppointmentViewPage() {
             })}
           </p>
           <p>
-            <strong>Serviços:</strong> {appointment.services.join(', ') || '—'}
+            <strong>Services:</strong> {appointment.services.join(', ') || '—'}
           </p>
           <p>
-            <strong>Valor:</strong> R$ {appointment.value.toFixed(2).replace('.', ',')}
+            <strong>Amount:</strong> R$ {appointment.value.toFixed(2)}
           </p>
           <p style={{ marginTop: 12 }}>
             <span className={`status-pill ${statusClass[appointment.status]}`}>
@@ -122,12 +122,12 @@ export function AppointmentViewPage() {
         </div>
         {appointment.status === 'marked' && (
           <Button variant="secondary" loading={canceling} onClick={() => void handleCancel()}>
-            Cancelar agendamento
+            Cancel appointment
           </Button>
         )}
         <div style={{ marginTop: 12 }}>
           <Button variant="outline" onClick={() => navigate(-1)}>
-            Voltar
+            Back
           </Button>
         </div>
       </div>

@@ -6,7 +6,7 @@ monthly invoices, and it **manages its employees**: enrolls them in an
 agreement (under the same rules as the staff — the plan covered, the six
 months of the contract, frozen conditions) and removes them when they leave.
 It never sees the employees' health records, appointments or anything else
-of the network; payments are registered by Santé Saúde's staff.
+of the network; payments are registered by Hollic Health's staff.
 """
 
 import unicodedata
@@ -237,7 +237,7 @@ def _person(db: Session, body: PortalEmployeeIn, partner) -> Customer:
         if not _same_name(row.name, body.name):
             raise HTTPException(
                 status_code=409,
-                detail="This CPF is registered under another name: check the employee's data or contact Santé Saúde",
+                detail="This CPF is registered under another name: check the employee's data or contact Hollic Health",
             )
         return row
     row = Customer(
@@ -283,7 +283,7 @@ def portal_enroll(body: PortalEmployeeIn, db: Session = Depends(get_db), user: U
         if other.agreement is not None and other.agreement.partner_id == user.partner_id:
             detail = f"{person.name} is already enrolled in {other.agreement.name} until {other.expires_on:%Y-%m-%d}"
         else:
-            detail = f"{person.name} already has a plan with Santé Saúde for that period: contact Santé Saúde to move it into your agreement"
+            detail = f"{person.name} already has a plan with Hollic Health for that period: contact Hollic Health to move it into your agreement"
         raise HTTPException(status_code=409, detail=detail)
     row = record_subscription(
         db,
@@ -478,7 +478,7 @@ def portal_edit_employee(
             None,
         )
         if clash is not None:
-            raise HTTPException(status_code=409, detail="This CPF belongs to another person registered with Santé Saúde")
+            raise HTTPException(status_code=409, detail="This CPF belongs to another person registered with Hollic Health")
     for field, label in (("name", "name"), ("document", "CPF"), ("birth_date", "birth date"), ("email", "email"), ("phone", "phone")):
         value = getattr(body, field)
         if value != getattr(person, field) and not (value in (None, "") and getattr(person, field) in (None, "")):
@@ -569,19 +569,19 @@ def portal_remove_dependent(
     subscription_id: int, dependent_id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)
 ):
     """The company takes a dependent off its employee's plan: the fees follow.
-    A dependent with appointments stays (its history): Santé Saúde removes it."""
+    A dependent with appointments stays (its history): Hollic Health removes it."""
     row = _load_employee(db, user, subscription_id)
     _editable(row)
     dependent = _load_dependent(db, row, dependent_id)
     name = dependent.name
     if db.query(Appointment.id).filter(Appointment.dependent_id == dependent.id).first() is not None:
-        raise HTTPException(status_code=409, detail=f"{name} has appointments: contact Santé Saúde to remove the dependent")
+        raise HTTPException(status_code=409, detail=f"{name} has appointments: contact Hollic Health to remove the dependent")
     try:
         db.delete(dependent)
         _reprice(db, row)
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=409, detail=f"{name} has appointments: contact Santé Saúde to remove the dependent")
+        raise HTTPException(status_code=409, detail=f"{name} has appointments: contact Hollic Health to remove the dependent")
     employee_changed_by_company(db, row, f"Dependent removed: {name}.", user)
     db.commit()
     db.expire_all()

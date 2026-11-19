@@ -45,7 +45,7 @@ def ctx(client):
     c.clinic_bar = client.post(
         "/clinics", headers=admin, json={"name": "Clinic Bar", "city": "Example", "state": "RJ", "ibge_code": "3304557", "fee_cents": 2000}
     ).json()["id"]
-    client.put("/company", headers=admin, json={"name": "Santé Saúde Ltda", "cnpj": "11.111.111/0001-11", "city": "Sample", "state": "SP", "ibge_code": "3550308", "tax_regime": "Lucro Presumido"})
+    client.put("/company", headers=admin, json={"name": "Hollic Health Ltda", "cnpj": "11.111.111/0001-11", "city": "Sample", "state": "SP", "ibge_code": "3550308", "tax_regime": "Lucro Presumido"})
     c.plan = ensure_plan(client, admin, discount_percent=50)  # gross 15000 -> amount 7500
     c.pro_foo = client.post(
         "/professionals", headers=admin, json={"name": "Lorem Ipsum", "specialty_id": 1, "clinic_id": 1, "price_cents": 5000}
@@ -89,7 +89,7 @@ def standard_rules(ctx):
 
 
 def test_company_settings_read_by_staff_written_by_admin(ctx):
-    assert ctx.client.get("/company", headers=ctx.attendant).json()["name"] == "Santé Saúde Ltda"
+    assert ctx.client.get("/company", headers=ctx.attendant).json()["name"] == "Hollic Health Ltda"
     assert ctx.client.get("/company", headers=ctx.client_headers).status_code == 403
     body = {"name": "X", "state": "sp", "ibge_code": "3550308"}
     assert ctx.client.put("/company", headers=ctx.supervisor, json=body).status_code == 403
@@ -332,7 +332,7 @@ def test_finance_report(ctx):
     ctx.book(marked_at=MONDAY_8, status="realizada")
     ctx.book(marked_at=MONDAY_9)  # scheduled: not earned yet
     report = ctx.client.get("/reports/finance?granularity=month&start=2026-10-01&end=2026-10-31", headers=ctx.admin).json()
-    assert report["company"]["name"] == "Santé Saúde Ltda"
+    assert report["company"]["name"] == "Hollic Health Ltda"
     totals = report["totals"]
     assert totals["appointments_completed"] == 1
     assert totals["appointments_gross_cents"] == 15000

@@ -33,7 +33,7 @@ from .prescriptions import purge_expired as purge_expired_prescriptions, retain_
 from .queue import KIND_EMAIL, process_due_jobs
 from .reminders import schedule_reminders
 
-log = logging.getLogger("sante.worker")
+log = logging.getLogger("hollic.worker")
 
 WORKER_ENABLED = os.getenv("WORKER_ENABLED", "1") not in {"0", "false", "False"}
 WORKER_INTERVAL_SECONDS = int(os.getenv("WORKER_INTERVAL_SECONDS", "30"))

@@ -131,12 +131,12 @@ def test_rabbitmq_topology_is_durable_with_dead_lettering(fake_pika):
     channel = FakeChannel()
     broker = RabbitMQBroker("amqp://guest:guest@localhost/%2F", connection=FakeConnection(channel))
     broker.channel()
-    assert channel.exchanges["sante"] == {"type": "direct", "durable": True}
+    assert channel.exchanges["hollic"] == {"type": "direct", "durable": True}
     assert channel.exchanges[DEAD_EXCHANGE]["durable"] is True
-    assert channel.queues["sante.jobs"]["durable"] is True
-    assert channel.queues["sante.jobs"]["arguments"] == {"x-dead-letter-exchange": DEAD_EXCHANGE, "x-dead-letter-routing-key": DEAD_QUEUE}
+    assert channel.queues["hollic.jobs"]["durable"] is True
+    assert channel.queues["hollic.jobs"]["arguments"] == {"x-dead-letter-exchange": DEAD_EXCHANGE, "x-dead-letter-routing-key": DEAD_QUEUE}
     assert channel.queues[DEAD_QUEUE]["durable"] is True
-    assert ("sante.jobs", "sante", "sante.jobs") in channel.bindings
+    assert ("hollic.jobs", "hollic", "hollic.jobs") in channel.bindings
     assert (DEAD_QUEUE, DEAD_EXCHANGE, DEAD_QUEUE) in channel.bindings
     assert channel.confirms is True and channel.qos == broker.prefetch
 
@@ -145,7 +145,7 @@ def test_rabbitmq_publish_is_persistent_and_confirmed(fake_pika):
     channel = FakeChannel()
     broker = RabbitMQBroker("amqp://x", connection=FakeConnection(channel))
     broker.publish({"job_id": 7}, message_id="job-7-1", headers={"kind": "email"})
-    properties, body = channel.messages["sante.jobs"][0]
+    properties, body = channel.messages["hollic.jobs"][0]
     assert properties.delivery_mode == 2  # persistent
     assert properties.message_id == "job-7-1" and properties.headers == {"kind": "email"}
     assert json.loads(body) == {"job_id": 7}
@@ -162,7 +162,7 @@ def test_rabbitmq_consume_acks_nacks_and_dead_letters(fake_pika):
     broker.publish({"job_id": 1}, message_id="a")
     broker.publish({"job_id": 2}, message_id="b")  # handler says "dead-letter"
     broker.channel()
-    channel.messages["sante.jobs"].append((None, b"not json"))  # garbage on the queue
+    channel.messages["hollic.jobs"].append((None, b"not json"))  # garbage on the queue
     seen = []
 
     def handler(message):

@@ -1,18 +1,18 @@
-# Santé Saúde — PWA
+# Hollic Health — PWA
 
-Aplicativo do paciente. Nesta cópia ele fala com a API FastAPI deste repositório (`/api/app/v1`), no mesmo formato de antes. O repositório de produção não é alterado.
+Patient app. This copy talks to the FastAPI API in this repository (`/api/app/v1`), in the same shape as before. The production repository is left untouched.
 
 ## Stack
 
 - Vite + React + TypeScript
 - React Router
 - vite-plugin-pwa
-- Cliente HTTP nativo (`fetch`) → `/api/app/v1/*`
+- Native HTTP client (`fetch`) → `/api/app/v1/*`
 
-## Como rodar
+## How to run
 
-1. Suba a API (ex.: `php artisan serve` em `http://127.0.0.1:8000`)
-2. No PWA:
+1. Start the API (for example uvicorn on `http://127.0.0.1:8000`)
+2. In the PWA:
 
 ```bash
 cp .env.example .env
@@ -20,28 +20,28 @@ npm install
 npm run dev
 ```
 
-Com `VITE_API_URL` vazio, o Vite faz proxy de `/api` → `http://127.0.0.1:8000`.
+With `VITE_API_URL` empty, Vite proxies `/api` → `http://127.0.0.1:8000`.
 
-Para apontar direto para homolog/produção:
+To point straight at staging or production:
 
 ```env
-VITE_API_URL=https://api2.santesaude.com.br/api
+VITE_API_URL=https://api2.hollic-health.example/api
 ```
 
-Ou altere o alvo do proxy:
+Or change the proxy target:
 
 ```env
 VITE_API_PROXY_TARGET=http://127.0.0.1:8000
 ```
 
-Na API, configure CORS/origens (`FRONTEND_APP_URL=http://127.0.0.1:5173`) se não usar o proxy.
+On the API, allow the origin (`http://127.0.0.1:5174`) if you are not using the proxy.
 
 ## Auth
 
-- `POST /api/app/v1/login` → Bearer Sanctum
-- Sessão em `localStorage` (`sante_pwa_session`)
-- `401` limpa sessão e redireciona para login
+- `POST /api/app/v1/login` → Bearer token
+- Session in `localStorage` (`hollic_pwa_session`)
+- `401` clears the session and sends the user back to sign-in
 
-## Endpoints usados
+## Endpoints in use
 
-Login/logout, highlights, appointments, checkout, categories, subscriptions, sante-card, addresses, notifications, partners, accredited-network, update customer, change-password, forgot-password.
+Login/logout, highlights, appointments, checkout, categories, addresses, notifications, partners, accredited-network, update customer, change-password, forgot-password.

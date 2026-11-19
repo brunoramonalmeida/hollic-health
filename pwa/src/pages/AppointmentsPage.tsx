@@ -18,31 +18,31 @@ export function AppointmentsPage() {
 
   return (
     <div className="page appointments">
-      <h1 className="title-page">Agendamentos</h1>
+      <h1 className="title-page">Appointments</h1>
       <div className="toggle">
         <button
           type="button"
           className={tab === 'open' ? 'is-active' : ''}
           onClick={() => setTab('open')}
         >
-          Em aberto
+          Open
         </button>
         <button
           type="button"
           className={tab === 'history' ? 'is-active' : ''}
           onClick={() => setTab('history')}
         >
-          Histórico
+          History
         </button>
       </div>
-      <Button onClick={() => navigate('/app/agendar')}>Agendar consulta</Button>
+      <Button onClick={() => navigate('/app/schedule')}>Book an appointment</Button>
       {loadingAppointments ? (
         <div className="empty-state">
           <div className="spinner" />
         </div>
       ) : list.length === 0 ? (
         <div className="empty-state">
-          Não há conteúdo disponível
+          Nothing to show here
           <button
             type="button"
             onClick={() => void refreshAppointments()}
@@ -55,7 +55,7 @@ export function AppointmentsPage() {
               cursor: 'pointer',
             }}
           >
-            Atualizar
+            Refresh
           </button>
         </div>
       ) : (

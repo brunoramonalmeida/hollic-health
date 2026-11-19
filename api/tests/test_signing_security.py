@@ -47,7 +47,7 @@ def test_enrolment_flow():
     secret = begin_enrolment(u)
     assert len(secret) == 32 and not totp_enabled(u)  # pending until confirmed
     uri = otpauth_uri(secret, "pro@example.com")
-    assert uri.startswith("otpauth://totp/Sante%20Saude%3Apro%40example.com?secret=") and "period=30" in uri and "digits=6" in uri
+    assert uri.startswith("otpauth://totp/Hollic%20Health%3Apro%40example.com?secret=") and "period=30" in uri and "digits=6" in uri
     with pytest.raises(SigningError, match="does not match"):
         confirm_enrolment(u, "000000" if current_code(secret, NOW) != "000000" else "111111", NOW)
     confirm_enrolment(u, current_code(secret, NOW), NOW)
@@ -153,7 +153,7 @@ def test_totp_enrolment_api(ctx):
     setup = ctx.client.post("/auth/totp/setup", headers=ctx.lorem_login)
     assert setup.status_code == 200, setup.text
     body = setup.json()
-    assert len(body["secret"]) == 32 and body["account"] == f"professional{ctx.lorem}@example.com" and body["issuer"] == "Sante Saude"
+    assert len(body["secret"]) == 32 and body["account"] == f"professional{ctx.lorem}@example.com" and body["issuer"] == "Hollic Health"
     assert body["otpauth_uri"].startswith("otpauth://totp/")
     assert ctx.client.get("/auth/totp", headers=ctx.lorem_login).json()["pending"] is True
     wrong = ctx.client.post("/auth/totp/confirm", headers=ctx.lorem_login, json={"code": "000000" if current_code(body["secret"], clock.now()) != "000000" else "111111"})

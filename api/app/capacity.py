@@ -1,7 +1,7 @@
 """Service capacity of professionals and clinics.
 
 Professionals and clinics also serve patients outside the network, so each
-one can reserve only part of its agenda for Santé Saúde: a maximum number of
+one can reserve only part of its agenda for Hollic Health: a maximum number of
 appointments **per day** (``daily_limit``) and **per calendar month**
 (``monthly_limit``); 0 means unlimited. Unlike the plan's appointment limit
 (app.usage), capacity is a hard stop: once a limit is reached the system

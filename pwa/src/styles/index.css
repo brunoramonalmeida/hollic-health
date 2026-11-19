@@ -141,7 +141,7 @@ textarea {
   flex-direction: column;
 }
 
-/* Desktop: moldura escura só em telas largas */
+/* Desktop: dark frame on wide screens only */
 @media (min-width: 481px) {
   body,
   .app-shell {

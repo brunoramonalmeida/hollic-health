@@ -1,9 +1,9 @@
 """Patient app contract.
 
 The PWA calls ``/api/app/v1`` (the shape of the old Laravel app). These
-routes translate that contract onto the existing customers, plans,
-appointments and virtual card. The operations API under ``/appointments``
-and the rest is unchanged.
+routes translate that contract onto the existing customers and
+appointments. Plan and virtual card are not part of this app yet. The
+operations API under ``/appointments`` and the rest is unchanged.
 """
 
 from datetime import date, datetime
@@ -13,20 +13,11 @@ from sqlalchemy.orm import Session, joinedload
 
 from .. import clock
 from ..auth import ROLE_CLIENT, create_token, ensure_access_active, get_current_user, verify_password
-from ..billing import (
-    INSTALLMENT_OVERDUE,
-    INSTALLMENT_PAID,
-    current_subscription,
-    installment_status,
-    monthly_amount,
-    subscription_status,
-    waiting_until,
-)
+from ..billing import current_subscription, subscription_status
 from ..database import get_db
 from ..models import Appointment, Clinic, Customer, Notification, Professional, Specialty, User
 from ..routers.appointments import _out, _query, create_appointment, update_appointment
 from ..routers.auth import change_password
-from ..routers.customers import _card_out
 from ..schemas import AppointmentIn, PasswordChangeIn
 
 router = APIRouter(prefix="/api/app/v1", tags=["mobile"])
@@ -64,9 +55,9 @@ UFS = {
 UF_ID = {uf: index + 1 for index, uf in enumerate(UFS)}
 
 STATUS_META = {
-    "agendada": ("marked", "Agendado", True),
-    "realizada": ("completed", "Concluído", False),
-    "cancelada": ("canceled", "Cancelado", False),
+    "agendada": ("marked", "Scheduled", True),
+    "realizada": ("completed", "Completed", False),
+    "cancelada": ("canceled", "Cancelled", False),
 }
 
 
@@ -185,7 +176,7 @@ def _appointment_payload(row) -> dict:
         "specialty": row.specialty_name,
         "professional": row.professional_name,
         "services": [row.specialty_name],
-        "payment_method": "Plano",
+        "payment_method": "Plan",
         "observations": row.notes,
         "meta": {
             "status": code,
@@ -343,7 +334,7 @@ def needed_data(att: int, db: Session = Depends(get_db), _user: User = Depends(_
         "professionals": [{"id": person.id, "name": person.name} for person in people],
         "specialties": [{"id": specialty.id, "name": specialty.name}],
         "services": [{"id": specialty.id, "name": specialty.name, "price": specialty.price_cents / 100}],
-        "payment_methods": [{"id": 1, "name": "Plano"}],
+        "payment_methods": [{"id": 1, "name": "Plan"}],
     }
 
 
@@ -418,62 +409,7 @@ def categories(db: Session = Depends(get_db), _user: User = Depends(_client)):
 
 @router.get("/payment-methods")
 def payment_methods(_user: User = Depends(_client)):
-    return [{"id": 1, "name": "Plano"}]
-
-
-@router.get("/subscriptions")
-def subscription(db: Session = Depends(get_db), user: User = Depends(_client)):
-    row = current_subscription(db, user.customer_id)
-    if row is None:
-        raise HTTPException(status_code=404, detail="No plan subscription")
-    customer = _holder(db, user)
-    cents = monthly_amount(row.modality, len(customer.dependents), row.discount_percent)
-    today = clock.today()
-    charges = []
-    for item in sorted(row.installments, key=lambda item: item.sequence):
-        status = installment_status(item, today)
-        label = {INSTALLMENT_PAID: "Pago", INSTALLMENT_OVERDUE: "Vencido"}.get(status, "Pendente")
-        charges.append(
-            {
-                "id": item.id,
-                "amount": item.amount_cents / 100,
-                "due_date": item.due_on.isoformat(),
-                "payday": item.paid_on.isoformat() if item.paid_on else None,
-                "status": status,
-                "status_label": label,
-            }
-        )
-    return {
-        "id": row.id,
-        "value": cents / 100,
-        "status": subscription_status(row, row.installments, today),
-        "modality": {"id": row.modality_id, "name": row.modality.name, "value": cents / 100},
-        "paymentMethod": {"name": "Plano"},
-        "transactions": charges,
-    }
-
-
-@router.get("/sante-card")
-def sante_card(db: Session = Depends(get_db), user: User = Depends(_client)):
-    customer = _holder(db, user)
-    card = _card_out(db, customer, customer, None)
-    subscription = current_subscription(db, customer.id)
-    grace = None
-    joined = None
-    if subscription is not None:
-        joined = subscription.joined_on.isoformat()
-        grace = waiting_until(subscription.joined_on, subscription.modality.grace_days).isoformat()
-    return {
-        "holder": customer.name,
-        "user_code": card.card_number,
-        "code": card.code,
-        "dependents": [item.name for item in customer.dependents],
-        "modality": card.plan_name or "Sem plano",
-        "description": "Carteira do titular",
-        "services": ["Consultas na rede"],
-        "accession_date": joined or "",
-        "grace_period_ends_at": grace or "",
-    }
+    return [{"id": 1, "name": "Plan"}]
 
 
 @router.get("/addresses")

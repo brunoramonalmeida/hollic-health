@@ -5,7 +5,7 @@ customer's client logins) and the **appointment's professional** (its
 logins). Nobody else takes part — the staff has no access, by construction:
 the server never holds a key that opens the messages.
 
-How the encryption works (the browser does all of it, ``front/src/chatCrypto.js``):
+How the encryption works (the browser does all of it):
 
 * every user has an **identity key pair** (ECDH P-256) generated in its
   browser; the private key is non-extractable and stays in the device's

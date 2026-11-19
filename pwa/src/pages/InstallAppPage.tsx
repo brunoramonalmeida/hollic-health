@@ -14,57 +14,57 @@ export function InstallAppPage() {
     const result = await install()
     setLoading(false)
     if (result.ok) {
-      setMessage('App instalado! Procure o ícone Santé na tela inicial.')
+      setMessage('App installed. Look for the Hollic icon on your home screen.')
       return
     }
     if (result.reason === 'dismissed') {
-      setMessage('Instalação cancelada. Você pode tentar de novo quando quiser.')
+      setMessage('Installation cancelled. You can try again whenever you like.')
       return
     }
-    setMessage('Neste navegador, use as instruções abaixo para adicionar à tela inicial.')
+    setMessage('In this browser, use the steps below to add it to your home screen.')
   }
 
   return (
     <div className="page">
-      <BackHeader title="Instalar aplicativo" />
+      <BackHeader title="Install the app" />
       <div className="install-app">
-        <img src="/assets/icons/icon-192.png" alt="Santé Saúde" className="install-app__icon" />
-        <h2>Adicionar à tela inicial</h2>
+        <p className="install-app__name">Hollic Health</p>
+        <h2>Add to home screen</h2>
         <p>
-          Instale a Santé como um app no seu celular: ícone na tela inicial, abertura em tela cheia
-          (sem barra do navegador) e acesso rápido, como um aplicativo nativo.
+          Install Hollic as an app on your phone: a home-screen icon, full-screen launch
+          (no browser bar) and quick access, like a native app.
         </p>
 
         <p className="install-app__hint">
-          Depois de instalar, abra sempre pelo ícone na tela inicial — só assim o app fica em
-          fullscreen.
+          After installing, always open it from the home-screen icon — that is what keeps the app
+          full screen.
         </p>
 
         {installed ? (
           <div className="install-app__done">
-            <strong>Já instalado</strong>
-            <p>Você já está usando a Santé no modo aplicativo.</p>
+            <strong>Already installed</strong>
+            <p>You are already using Hollic as an app.</p>
           </div>
         ) : (
           <>
             {canPrompt && (
               <Button loading={loading} onClick={() => void handleInstall()}>
-                Adicionar à tela inicial
+                Add to home screen
               </Button>
             )}
 
             {ios && (
               <div className="install-app__steps">
-                <h3>No iPhone / Safari</h3>
+                <h3>On iPhone / Safari</h3>
                 <ol>
                   <li>
-                    Toque em <strong>Compartilhar</strong> (ícone de quadrado com seta).
+                    Tap <strong>Share</strong> (the square with an arrow).
                   </li>
                   <li>
-                    Role e toque em <strong>Adicionar à Tela de Início</strong>.
+                    Scroll and tap <strong>Add to Home Screen</strong>.
                   </li>
                   <li>
-                    Confirme em <strong>Adicionar</strong>.
+                    Confirm with <strong>Add</strong>.
                   </li>
                 </ol>
               </div>
@@ -72,14 +72,13 @@ export function InstallAppPage() {
 
             {!ios && !canPrompt && (
               <div className="install-app__steps">
-                <h3>No Android / Chrome</h3>
+                <h3>On Android / Chrome</h3>
                 <ol>
-                  <li>Abra o menu do navegador (⋮).</li>
+                  <li>Open the browser menu (⋮).</li>
                   <li>
-                    Toque em <strong>Instalar aplicativo</strong> ou{' '}
-                    <strong>Adicionar à tela inicial</strong>.
+                    Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.
                   </li>
-                  <li>Confirme a instalação.</li>
+                  <li>Confirm the installation.</li>
                 </ol>
               </div>
             )}

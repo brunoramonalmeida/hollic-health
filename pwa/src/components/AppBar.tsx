@@ -6,11 +6,11 @@ export function AppBar() {
 
   return (
     <header className="app-bar">
-      <Link to="/app/notificacoes" className="app-bar__notify">
-        <img src="/assets/icons/icon_notification.svg" alt="Notificações" />
+      <Link to="/app/notifications" className="app-bar__notify">
+        <img src="/assets/icons/icon_notification.svg" alt="Notifications" />
         {unreadCount > 0 && <span className="app-bar__badge">{unreadCount}</span>}
       </Link>
-      <img className="app-bar__logo" src="/assets/images/logo.svg" alt="Santé Saúde" />
+      <p className="app-bar__logo">Hollic Health</p>
       <div className="app-bar__spacer" />
     </header>
   )

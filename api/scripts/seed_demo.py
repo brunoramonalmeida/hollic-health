@@ -1,4 +1,4 @@
-"""Fictional data for the Santé Saúde base.
+"""Fictional data for the Hollic Health base.
 
 Plans: Plan Foo and Plan Bar (category Individual) and Plan Enterprise
 (category Enterprise: only through company agreements, no waiting period).
@@ -141,7 +141,7 @@ def main():
         db.add(
             Company(
                 id=1,
-                name="Santé Saúde Ltda",
+                name="Hollic Health Ltda",
                 cnpj="11.111.111/0001-11",
                 city="Sample",
                 state="SP",
@@ -179,7 +179,7 @@ def main():
             # Offers remote appointments (video call) at a lower rate.
             remote_enabled=True,
             remote_price_cents=4000,
-            # Also serves outside the network: at most 6 Santé Saúde visits a
+            # Also serves outside the network: at most 6 Hollic Health visits a
             # day, 80 a month.
             daily_limit=6,
             monthly_limit=80,
@@ -683,7 +683,7 @@ def main():
         # on 19/10: the patient downloads it from the appointment page.
         signed_visit = db.query(Appointment).filter(Appointment.professional_id == marina.id, Appointment.status == "realizada").first()
         prescription = Document()
-        prescription.text("Santé Saúde — Medical prescription", size=14, bold=True)
+        prescription.text("Hollic Health — Medical prescription", size=14, bold=True)
         prescription.text(f"Patient: {helena.name}   Visit: 19/10/2026 09:00   Professional: {marina.name}")
         prescription.gap()
         prescription.text("Dipirona 500 mg — 1 tablet every 6 hours for 3 days.")

@@ -74,7 +74,7 @@ class Clinic(AddressMixin, Base):
     on_call_fee_cents: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # Fee charged on remote appointments (no room is used; may be 0); null: same as fee_cents.
     remote_fee_cents: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    # Service capacity reserved for Santé Saúde (the clinic also serves
+    # Service capacity reserved for Hollic Health (the clinic also serves
     # outside the network): bookings stop at these counts. 0: unlimited.
     # See app.capacity.
     daily_limit: Mapped[int] = mapped_column(Integer, default=0)
@@ -88,7 +88,7 @@ class Company(AddressMixin, Base):
     __tablename__ = "company"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(160), default="Santé Saúde")
+    name: Mapped[str] = mapped_column(String(160), default="Hollic Health")
     cnpj: Mapped[str] = mapped_column(String(18), default="")
     city: Mapped[str] = mapped_column(String(80), default="")
     state: Mapped[str] = mapped_column(String(2), default="")
@@ -165,7 +165,7 @@ class Professional(Base):
     # (null: the regular fee). See app.remote and app.pricing.
     remote_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
     remote_price_cents: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    # Service capacity reserved for Santé Saúde (the professional also has
+    # Service capacity reserved for Hollic Health (the professional also has
     # appointments outside the network): bookings stop at these counts.
     # 0: unlimited. See app.capacity.
     daily_limit: Mapped[int] = mapped_column(Integer, default=0)
@@ -457,7 +457,7 @@ class Agreement(Base):
     enrollment and the agreement's terms cannot change once employees are
     enrolled — a renegotiation is a new contract. The employees always get
     the negotiated conditions; for every month the company falls below its
-    minimum, it pays Santé Saúde the difference (the discounts granted on
+    minimum, it pays Hollic Health the difference (the discounts granted on
     that month's fees — ``AgreementCharge``). See app.partners.
 
     ``payer``: ``company`` (the partner pays every fee: one consolidated
@@ -543,7 +543,7 @@ class EnrollmentShare(Base):
 class AgreementCharge(Base):
     """The **shortfall** the partner company paid for one month of an
     agreement: the month's fees (those due in it) were billed to fewer
-    employees than the agreement's minimum, so the company pays Santé Saúde
+    employees than the agreement's minimum, so the company pays Hollic Health
     the discounts granted on them. Recorded when paid (the amount and the
     headcount are snapshotted then), with its tax lines."""
 
